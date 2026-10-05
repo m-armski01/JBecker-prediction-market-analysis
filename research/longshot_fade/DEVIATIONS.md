@@ -79,3 +79,31 @@ Every departure from the study spec is listed here, with what changed, why, and 
 ## Post-registration entries
 
 <!-- append new entries below; never edit the entries above -->
+
+**D13. Kalshi API outcome mapping for holdouts.**
+- *What:* in `unlock.py`, a market counts as final if its status is `finalized` or `settled`. The newer API may report `settled`.
+- Result `yes`/`no` means settled.
+- A final market whose result is empty or `void` counts as void.
+- Any other market is unresolved, i.e. censored.
+- *Decided:* before the freeze. *Acted on in:* commit 2 (`panel: positions table, fee model, stats, tests`).
+
+**D14. Where the scripts are committed.**
+- `unlock.py` and `holdout_b.py` go in commit 2, so the holdouts run on code that existed before the freeze.
+- `run_train.py` goes in commit 3.
+- `run_validate.py` and `freeze.py` go in commit 4. `freeze.py` checks for a clean tree, so it has to be committed before it runs.
+- *Spec:* lists the commit 2 code but does not say where these scripts are committed.
+
+**D15. Behaviour of the holdout runs.**
+- `unlock.py --holdout A` aborts if the Kalshi API cannot be reached. It aborts before computing any outcome statistic and before writing the log, so the lock stays intact.
+  - `--allow-unreachable` overrides this: markets without a local outcome are then censored. It may only be used after a dated entry in this file.
+- The backfill caches one JSON line per ticker, so an interrupted backfill can resume without fetching anything twice.
+- For holdA entries, a backfilled `close_time` (the final close) replaces the snapshot's `close_time` for `hold_days`.
+- `unlock.py --mark-b-unavailable "<reason>"` records holdB as unavailable without reading any outcome.
+
+**D16. Dropped holdB trades.**
+- *What:* trades with no market metadata, outside the window, with a price sum other than 99 or 100, or with an invalid taker side are dropped during normalization. Block trades are dropped too (D6). Each count is reported in the holdB manifest.
+
+**D17. Definition of the sanity check.**
+- *What:* `gross_ret` per position is (100 − c)/c if the position won, −1 if it lost and 0 if the market was void.
+- *Population:* non-purged, settled-or-void train positions with cost 1–99¢.
+- *Statistic:* the sign test is the mean maker `gross_ret` minus the mean taker `gross_ret`, per position.

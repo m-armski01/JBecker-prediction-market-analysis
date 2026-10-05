@@ -1,0 +1,23 @@
+{
+  "train": {
+    "events": 23485,
+    "events_purged": 1451,
+    "trade_rows": 18076641,
+    "trade_rows_purged": 946219,
+    "panel_rows_purged": 1892438
+  },
+  "val": {
+    "events": 16797,
+    "events_purged": 2185,
+    "trade_rows": 17218565,
+    "trade_rows_purged": 1285231,
+    "panel_rows_purged": 2570462
+  },
+  "holdA": {
+    "events": 162087,
+    "events_purged": 0,
+    "trade_rows": 32634469,
+    "trade_rows_purged": 0,
+    "panel_rows_purged": 0
+  }
+}
