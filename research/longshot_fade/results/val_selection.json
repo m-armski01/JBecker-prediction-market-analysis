@@ -1,0 +1,11 @@
+{
+  "selected": null,
+  "verdict": "Not supported (failed validation)",
+  "qualifying": [],
+  "rule": "keep validation mean_net_ret > 0; choose highest validation t_event",
+  "candidates": [
+    "b90-99_ex_finance_liq500",
+    "b90-99_all_liq500",
+    "b95-99_ex_finance_liq500"
+  ]
+}

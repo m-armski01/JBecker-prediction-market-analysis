@@ -1,0 +1,13 @@
+{
+  "config_id": "b95-99_all_liq0",
+  "split": "train",
+  "raw_candidates": 51062,
+  "raw_settled": 51040,
+  "raw_mean_gross_ret_settled": -0.03220003380696737,
+  "panel_n_candidates": 51062,
+  "panel_n_entries_settled_or_void": 51057,
+  "panel_n_void": 17,
+  "panel_mean_gross_ret_incl_void": -0.03218931245,
+  "match_candidates": true,
+  "match_settled": true
+}

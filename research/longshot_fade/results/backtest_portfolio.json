@@ -1,0 +1,131 @@
+{
+  "config": {
+    "id": "b90-99_ex_finance_liq500",
+    "band_lo": 90,
+    "band_hi": 99,
+    "category_filter": "ex_finance",
+    "liquidity_floor": 500.0
+  },
+  "config_label": "reference (train rank 1; not frozen - validation failed)",
+  "n_contracts": 100,
+  "splits": {
+    "train": {
+      "n_positions": 23030,
+      "n_events": 10699,
+      "mean_entry_price_cents": 93.24515848892749,
+      "win_rate": 0.890447242726878,
+      "breakeven_win_rate_incl_fees": 0.9368286495874947,
+      "total_realized_pnl_usd": -106353.37999999998,
+      "total_cost_usd": 2157516.38,
+      "peak_capital_in_use_usd": 94071.22000000015,
+      "return_on_peak_capital": -1.1305623547775803,
+      "return_per_capital_day": -0.010183992961325399,
+      "max_drawdown_realized_usd": 106613.48000001928,
+      "worst_10_events": [
+        {
+          "event_ticker": "KXSHIBAD-25MAY2117",
+          "pnl_usd": -945.8299999999999
+        },
+        {
+          "event_ticker": "KXVOTETULSI-26",
+          "pnl_usd": -536.36
+        },
+        {
+          "event_ticker": "KXBTCD-25APR0710",
+          "pnl_usd": -474.78999999999996
+        },
+        {
+          "event_ticker": "KXBTCD-24NOV1517",
+          "pnl_usd": -466.38
+        },
+        {
+          "event_ticker": "KXINAUG-25",
+          "pnl_usd": -385.9
+        },
+        {
+          "event_ticker": "KXBTCD-25FEB0317",
+          "pnl_usd": -367.25
+        },
+        {
+          "event_ticker": "KXBTCD-25JUN2120",
+          "pnl_usd": -366.34999999999997
+        },
+        {
+          "event_ticker": "KXBTCD-25FEB2610",
+          "pnl_usd": -364.48
+        },
+        {
+          "event_ticker": "KXBTCD-25JAN2311",
+          "pnl_usd": -348.58
+        },
+        {
+          "event_ticker": "KXBTCD-24DEC0417",
+          "pnl_usd": -331.69
+        }
+      ],
+      "largest_event_share_of_total_pnl": NaN,
+      "largest_abs_event_share_of_gross_abs_pnl": 0.0031941442501114605,
+      "first_entry_utc": "2024-10-01T01:59:11.533107+00:00",
+      "last_settlement_utc": "2025-07-01T16:48:57.574709997+00:00"
+    },
+    "val": {
+      "n_positions": 16351,
+      "n_events": 8931,
+      "mean_entry_price_cents": 93.19570668460645,
+      "win_rate": 0.8882025564185677,
+      "breakeven_win_rate_incl_fees": 0.9363683077487616,
+      "total_realized_pnl_usd": -76801.81999999999,
+      "total_cost_usd": 1531055.82,
+      "peak_capital_in_use_usd": 25883.750000000116,
+      "return_on_peak_capital": -2.9671828850147155,
+      "return_per_capital_day": -0.055837369619061876,
+      "max_drawdown_realized_usd": 76889.80999999582,
+      "worst_10_events": [
+        {
+          "event_ticker": "KXTRUMPMENTION-25SEP02",
+          "pnl_usd": -606.67
+        },
+        {
+          "event_ticker": "KXNFLTOTAL-25SEP29NYJMIA",
+          "pnl_usd": -556.09
+        },
+        {
+          "event_ticker": "KXTRUMPMENTION-25SEP22",
+          "pnl_usd": -422.45
+        },
+        {
+          "event_ticker": "KXNCAAFTOTAL-25SEP27OREPSU",
+          "pnl_usd": -380.39
+        },
+        {
+          "event_ticker": "KXTHEOPEN-TOP1025",
+          "pnl_usd": -371.89
+        },
+        {
+          "event_ticker": "KXTRUMPMENTION-25SEP21",
+          "pnl_usd": -351.38
+        },
+        {
+          "event_ticker": "KXTRUMPMENTION-25JUL03",
+          "pnl_usd": -323.33
+        },
+        {
+          "event_ticker": "KXNFLSPREAD-25SEP07SFSEA",
+          "pnl_usd": -294.41999999999996
+        },
+        {
+          "event_ticker": "KXNFLTOTAL-25SEP08MINCHI",
+          "pnl_usd": -278.46999999999997
+        },
+        {
+          "event_ticker": "KXNCAAFSPREAD-25SEP19IOWARUTG",
+          "pnl_usd": -277.58
+        }
+      ],
+      "largest_event_share_of_total_pnl": NaN,
+      "largest_abs_event_share_of_gross_abs_pnl": 0.002690475052204538,
+      "first_entry_utc": "2025-07-01T00:00:37.921370+00:00",
+      "last_settlement_utc": "2025-10-01T21:27:27.285530998+00:00"
+    }
+  }
+}

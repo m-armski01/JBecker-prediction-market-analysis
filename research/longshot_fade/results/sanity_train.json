@@ -1,0 +1,17 @@
+{
+  "split": "train",
+  "definition": "mean maker gross_ret minus mean taker gross_ret, per position (non-purged, settled or void, cost 1-99c); gross_ret = (100-c)/c if won, -1 if lost, 0 if void",
+  "by_role": {
+    "maker": {
+      "positions": 17127820,
+      "mean_gross_ret": 0.03697800871022674
+    },
+    "taker": {
+      "positions": 17127820,
+      "mean_gross_ret": -0.08631998977207443
+    }
+  },
+  "maker_minus_taker_gross_ret": 0.12329799848230116,
+  "expected_sign": "positive",
+  "passes": true
+}

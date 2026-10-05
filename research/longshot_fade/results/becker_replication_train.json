@@ -1,0 +1,25 @@
+{
+  "split": "train",
+  "mean_gross_ret_taker": -0.08631998977203566,
+  "mean_gross_ret_maker": 0.03697800871019669,
+  "maker_minus_taker": 0.12329799848223236,
+  "yes_minus_no_gap_weighted_mean": -0.0490902882661313,
+  "share_of_cost_levels_yes_below_no": 0.7373737373737373,
+  "taker_no_all_prints_90_99": {
+    "positions": 1382809,
+    "mean_gross_ret": -0.004258464178423449,
+    "by_cost": {
+      "90": -0.0001872615078907066,
+      "91": -0.011363147979685729,
+      "92": -0.016361337810969764,
+      "93": -0.008287102209888642,
+      "94": -0.0063856183782488255,
+      "95": -0.0033135048062278025,
+      "96": -0.0037454068025880786,
+      "97": -0.005694310849047374,
+      "98": -0.0010633255895045074,
+      "99": 0.0001556141338298285
+    }
+  },
+  "note": "positions per trade (taker and maker rows); equal-cost comparison pools taker and maker rows"
+}

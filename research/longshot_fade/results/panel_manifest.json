@@ -1,0 +1,154 @@
+{
+  "generated_at_utc": "2026-10-05T17:15:03+00:00",
+  "built_from_head": "8dfc6af0e0cc2f217238a1021d9dfbe33d18ad44",
+  "working_tree_clean_at_build": false,
+  "protocol_json_sha256": "2063cd3be55e48854c7986636e0fcc770a7b708c68dd057c6d1c8c272bb33dd6",
+  "panel_dir": "data/research/longshot_fade/panel",
+  "columns": [
+    "trade_id",
+    "ticker",
+    "event_ticker",
+    "series",
+    "group",
+    "category",
+    "subcategory",
+    "ts",
+    "quarter",
+    "split",
+    "purged",
+    "role",
+    "direction",
+    "cost_cents",
+    "contracts",
+    "hours_since_open",
+    "prior_notional_usd",
+    "prior_trades",
+    "prev_yes_price",
+    "hours_to_close",
+    "close_time",
+    "result",
+    "settled",
+    "void",
+    "won"
+  ],
+  "splits": {
+    "train": {
+      "start_utc": "2024-10-01T00:00:00+00:00",
+      "end_utc_exclusive": "2025-07-01T00:00:00+00:00"
+    },
+    "val": {
+      "start_utc": "2025-07-01T00:00:00+00:00",
+      "end_utc_exclusive": "2025-10-01T00:00:00+00:00"
+    },
+    "holdA": {
+      "start_utc": "2025-10-01T00:00:00+00:00",
+      "end_utc_exclusive": null
+    }
+  },
+  "row_counts": [
+    {
+      "split": "train",
+      "quarter": "2024Q4",
+      "window_start_utc": "2024-10-01T00:00:00+00:00",
+      "window_end_utc": "2025-01-01T00:00:00+00:00",
+      "source_trades": 4127877,
+      "rows": 8255754,
+      "rows_purged": 157410,
+      "markets": 20651,
+      "events": 3690,
+      "rows_group_other": 317922,
+      "path": "data/research/longshot_fade/panel/split=train/quarter=2024Q4/part-0.parquet"
+    },
+    {
+      "split": "train",
+      "quarter": "2025Q1",
+      "window_start_utc": "2025-01-01T00:00:00+00:00",
+      "window_end_utc": "2025-04-01T00:00:00+00:00",
+      "source_trades": 6048928,
+      "rows": 12097856,
+      "rows_purged": 628246,
+      "markets": 44997,
+      "events": 9526,
+      "rows_group_other": 741590,
+      "path": "data/research/longshot_fade/panel/split=train/quarter=2025Q1/part-0.parquet"
+    },
+    {
+      "split": "train",
+      "quarter": "2025Q2",
+      "window_start_utc": "2025-04-01T00:00:00+00:00",
+      "window_end_utc": "2025-07-01T00:00:00+00:00",
+      "source_trades": 7899836,
+      "rows": 15799672,
+      "rows_purged": 1106782,
+      "markets": 57011,
+      "events": 12188,
+      "rows_group_other": 472242,
+      "path": "data/research/longshot_fade/panel/split=train/quarter=2025Q2/part-0.parquet"
+    },
+    {
+      "split": "val",
+      "quarter": "2025Q3",
+      "window_start_utc": "2025-07-01T00:00:00+00:00",
+      "window_end_utc": "2025-10-01T00:00:00+00:00",
+      "source_trades": 17218565,
+      "rows": 34437130,
+      "rows_purged": 2570462,
+      "markets": 75193,
+      "events": 16797,
+      "rows_group_other": 611908,
+      "path": "data/research/longshot_fade/panel/split=val/quarter=2025Q3/part-0.parquet"
+    },
+    {
+      "split": "holdA",
+      "quarter": "2025Q4",
+      "window_start_utc": "2025-10-01T00:00:00+00:00",
+      "window_end_utc": "2025-11-25T22:00:15.194246+00:00",
+      "source_trades": 32634469,
+      "rows": 65268938,
+      "rows_purged": 0,
+      "markets": 355524,
+      "events": 162087,
+      "rows_group_other": 913630,
+      "path": "data/research/longshot_fade/panel/split=holdA/quarter=2025Q4/part-0.parquet"
+    }
+  ],
+  "purge_summary": {
+    "train": {
+      "events": 23485,
+      "events_purged": 1451,
+      "trade_rows": 18076641,
+      "trade_rows_purged": 946219,
+      "panel_rows_purged": 1892438
+    },
+    "val": {
+      "events": 16797,
+      "events_purged": 2185,
+      "trade_rows": 17218565,
+      "trade_rows_purged": 1285231,
+      "panel_rows_purged": 2570462
+    },
+    "holdA": {
+      "events": 162087,
+      "events_purged": 0,
+      "trade_rows": 32634469,
+      "trade_rows_purged": 0,
+      "panel_rows_purged": 0
+    }
+  },
+  "unmapped_category": {
+    "group_label": "Other",
+    "row_share": 0.02250336101269438,
+    "market_share": 0.018545466093067307,
+    "n_raw_categories": 5562,
+    "n_raw_categories_other": 2551
+  },
+  "price_adjusted_trades_by_split": {
+    "train": 0,
+    "val": 0,
+    "holdA": 267291
+  },
+  "data_last_trade_utc": "2025-11-25T22:00:15.194245+00:00",
+  "holdA_files_sha256": {
+    "data/research/longshot_fade/panel/split=holdA/quarter=2025Q4/part-0.parquet": "4ed917c8879aaea42e353dfc3e160e56a825e88a2f1dfc0238c9a19bbd3b499a"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "study": "longshot_fade",
+  "protocol_version": 1,
+  "registered_on_utc": "2026-10-05",
+  "hypothesis": "H1: a liquidity taker who buys NO at a cost basis inside the frozen band (within 90-99 cents) and holds to resolution earns a positive mean return per dollar at risk, net of taker fees.",
+  "data": {
+    "trades_glob": "data/kalshi/trades/*.parquet",
+    "markets_glob": "data/kalshi/markets/*.parquet",
+    "sample_start_utc": "2024-10-01T00:00:00Z",
+    "price_normalization": {
+      "rule": "if yes_price + no_price == 99 then yes_cost = 100 - no_price and no_cost = 100 - yes_price, else the stored prices",
+      "returns_cost_range_cents": [1, 99]
+    }
+  },
+  "splits": {
+    "order": ["train", "val", "holdA", "holdB"],
+    "train": {"start_utc": "2024-10-01T00:00:00Z", "end_utc_exclusive": "2025-07-01T00:00:00Z"},
+    "val": {"start_utc": "2025-07-01T00:00:00Z", "end_utc_exclusive": "2025-10-01T00:00:00Z"},
+    "holdA": {"start_utc": "2025-10-01T00:00:00Z", "end_utc_exclusive": null, "note": "through the end of local data (last trade 2025-11-25 22:00 UTC); semi-blind"},
+    "holdB": {
+      "window": "[live-endpoint trades cutoff from GET /historical/cutoff at pull time, pull start)",
+      "pulled_after_tag": "prereg-frozen (run at HEAD = holdout-a-run)",
+      "historical_endpoints_used_for_trades": false,
+      "reverse_purge": "drop holdB events that have any trade in train, val or holdA",
+      "exclude_block_trades": true,
+      "outcome_fetch_min_days_after_pull": 7,
+      "power_gate_min_event_clusters": 300
+    },
+    "quarters_local": ["2024Q4", "2025Q1", "2025Q2", "2025Q3", "2025Q4"]
+  },
+  "purge": {
+    "unit": "event_ticker",
+    "rule": "keep each event only in the latest split containing any of its trades; flag its rows in earlier splits purged=true",
+    "uses_outcomes": false
+  },
+  "cluster_unit": "event_ticker",
+  "fees": {
+    "model": "taker fee per order, cents = ceil(100 * coef * multiplier * C * P * (1 - P)), P = cost_cents / 100",
+    "coef": 0.07,
+    "series_multipliers": [
+      {"series_regex": "^(KX)?(INX|NASDAQ100)", "multiplier": 0.5, "source": "Kalshi, 'We're Halving the Fees for Our S&P and Nasdaq Markets', 2022-09-14, effective 2022-09-22"}
+    ],
+    "default_multiplier": 1.0,
+    "maker_fees": "out of scope"
+  },
+  "order_size": {"base_contracts": 100, "sensitivity_contracts": [10, 1000]},
+  "grid": {
+    "bands_no_cost_cents": [[90, 99], [93, 99], [95, 99]],
+    "category_filters": ["all", "ex_finance"],
+    "finance_group_label": "Finance",
+    "liquidity_floors_usd": [0, 500],
+    "n_configs": 12,
+    "order": "band (outer), then category_filter, then liquidity_floor, each in the listed order"
+  },
+  "entry": {
+    "rule": "first taker row with direction = no, cost_cents in band, category and liquidity filters passing, not purged, timestamp inside the split window",
+    "one_entry_per": "ticker",
+    "ordering": "ts, then trade_id",
+    "hold_days_floor_days": 0.041666666666666664
+  },
+  "selection": {
+    "train_rank": ["t_event desc", "n_events desc", "grid order"],
+    "top_k_to_validation": 3,
+    "validation_rule": "keep configs with validation mean_net_ret > 0; choose the highest validation t_event; none -> 'Not supported (failed validation)'"
+  },
+  "stats": {
+    "mean_test": "event-clustered SE = sqrt(G/(G-1) * sum_g (sum_{i in g} (r_i - rbar))^2) / n; t = rbar / SE; one-sided H1: mean > 0",
+    "p_value": "one-sided Student t with G - 1 degrees of freedom",
+    "market_clustered_se": "same formula with each market as its own cluster",
+    "bootstrap": {"resample": "event clusters with replacement", "iterations": 1000, "seed": 20251001, "ci": "percentile", "level": 0.95, "rng": "numpy.random.default_rng"},
+    "bonferroni_m": 12,
+    "deflated_sharpe": {"trials": 12, "sr_variance_from": "train per-entry Sharpe ratios of all 12 configs", "status": "descriptive"}
+  },
+  "decision": {
+    "pass_requires_all": {"t_event_min": 2.0, "boot_ci_lo_strictly_greater_than": 0.0}
+  },
+  "verdicts": {
+    "pass|pass": "Supported (blind replication)",
+    "pass|unavailable_or_underpowered": "Supported (semi-blind only)",
+    "pass|fail": "Not replicated out of sample",
+    "fail|any": "Not supported",
+    "validation_failed": "Not supported (failed validation)"
+  }
+}
