@@ -107,3 +107,16 @@ Every departure from the study spec is listed here, with what changed, why, and 
 - *What:* `gross_ret` per position is (100 − c)/c if the position won, −1 if it lost and 0 if the market was void.
 - *Population:* non-purged, settled-or-void train positions with cost 1–99¢.
 - *Statistic:* the sign test is the mean maker `gross_ret` minus the mean taker `gross_ret`, per position.
+
+**D18. Descriptive build-out after validation failed** (decided 2026-10-05, before any §8 analysis was run).
+- *Situation:* validation selected no configuration (commit `e9bcead`), so no frozen configuration exists. The spec's §8 assumes one.
+- *What:* the §8 analyses use the **train rank-1 configuration**, `b90-99_ex_finance_liq500`, as a *reference configuration*. It was the first validation candidate. It is labelled as not frozen.
+  - The portfolio backtest, sensitivities and breakdowns are reported for **train and val only**, separately.
+  - The full 12-configuration train table stays in `results/train_grid.csv`.
+- *Holdouts stay locked:*
+  - holdA outcomes are never read;
+  - holdB is never pulled;
+  - `freeze.py`, `unlock.py` and `holdout_b.py` are never run;
+  - no `prereg-frozen`, `holdout-a-run` or `holdout-b-run` tag exists.
+- *Extra descriptive breakdown:* by hours since market open (< 1 h, 1–24 h, > 24 h) and by whether the entry was the market's first trade. These support the staleness objection in the report and do not affect the verdict.
+- *Acted on in:* commit 8.
